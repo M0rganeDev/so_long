@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:02:31 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/03 14:02:34 by morgane         ###   ########.fr       */
+/*   Updated: 2024/12/05 08:19:50 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,28 @@
 #include "libft.h"
 #include "map_parser.h"
 #include <fcntl.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+int	ft_strend(const char *target, const char *end)
+{
+	size_t	end_size;
+	size_t	target_size;
+
+	end_size = ft_strlen(end);
+	target_size = ft_strlen(target);
+	if (target_size < end_size)
+		return (0);
+	while (end_size != 0)
+	{
+		if (target[target_size] != end[end_size])
+			return (0);
+		--end_size;
+		--target_size;
+	}
+	return (1);
+}
 
 static int	check(int fd)
 {

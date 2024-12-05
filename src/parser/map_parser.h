@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:02:45 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/03 14:02:48 by morgane         ###   ########.fr       */
+/*   Updated: 2024/12/05 08:16:11 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,6 @@ int		map_leak_to_void(t_game_data *data, t_infos *infos);
 // as well as the exit.
 // returns 0 if it cant.
 int		is_exit_available(t_game_data *data, t_infos *infos);
+
+int		ft_strend(const char *target, const char *end);
 #endif

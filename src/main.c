@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:58:59 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/03 13:59:03 by morgane         ###   ########.fr       */
+/*   Updated: 2024/12/05 08:14:57 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	loop(t_game_data *data)
 
 int	manage_inputs(int keycode, t_game_data *data)
 {
+	static int	player_step = 0;
+
 	if (keycode == ESC)
 		clean_up(data);
 	data->can_step = 1;
@@ -42,7 +44,10 @@ int	manage_inputs(int keycode, t_game_data *data)
 	{
 		handle_player_inputs(keycode, data);
 		if (data->game_flags & GF_PLAYER_IS_MOVING)
+		{
 			update_player_pos(data);
+			ft_printf("Player has taken %d steps.\n", ++player_step);
+		}
 	}
 	else
 		ft_printf("key pressed: %d\n\n", keycode);
@@ -94,7 +99,7 @@ int	main(int argc, char **argv)
 	t_game_data	g_data;
 	int			is_valid;
 
-	if (argc == 1)
+	if (argc == 1 || !ft_strend(argv[1], ".ber"))
 		return (0);
 	g_data.game_flags = 0;
 	g_data.mlx = mlx_init();
