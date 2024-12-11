@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 14:00:47 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/03 14:00:50 by morgane         ###   ########.fr       */
+/*   Created: 2024/12/03 14:00:47 by morgane          #+#    #+#              */
+/*   Updated: 2024/12/11 14:05:46 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # define TILE_SCALE 32
 # define PLAYER_BIT_START 3
 
-# ifndef DEBUG_MODE
-#  define DEBUG_MODE 0
+// only set to 1 to get LSP working
+// in IS_BONUS related branches
+# ifndef IS_BONUS
+#  define IS_BONUS 0
 # endif
 
 # define PLAYER_TEXTURE "./textures/player.xpm"
@@ -42,6 +44,7 @@
 # define COLLECTIBLE_TEXTURE "./textures/collectible.xpm"
 # define EXIT_TEXTURE "./textures/exit.xpm"
 # define DEBUG_TEXTURE "./textures/debug.xpm"
+# define ENEMY_TEXTURE "./textures/enemy.xpm"
 
 // used to tell if if the is won and we need to clean up
 // and free memory all over the program
@@ -90,6 +93,7 @@ typedef struct s_textures
 	void	*ground;
 	void	*collectible;
 	void	*exit;
+	void	*enemy;
 	void	*wall_full_all_sides;
 	void	*wall_empty_all_sides;
 	void	*wall_side_left;
@@ -113,6 +117,9 @@ typedef struct s_textures
 // player coordinates, and so on.
 // game_flags is interacted with through bit manipulation 
 // (see GF flags at the beggining of the file.)
+
+# ifndef IS_BONUS
+
 typedef struct s_game_data
 {
 	void		*mlx;
@@ -125,6 +132,50 @@ typedef struct s_game_data
 	char		*exit;
 	int			game_flags;
 	int			can_step;
+	int			enemy_count;
 }				t_game_data;
+# else
 
+// in the map file, an enemy is marked as an F (for foe)
+#  define ENEMY_CHR F
+
+#  define ENEMY_DEFAULT_SPEED 16
+
+#  define ENEMY_WAIT_FRAME 60
+
+// move up or down
+#  define MOVE_Y_BIT 1
+#  define IS_MOVING_BIT 2
+#  define IS_MOVING_INVERTED_BIT 4
+
+// note : 
+// dir is not used as a litteral char, but as a 8 bit integer
+// as it it the smallest int we have at hand for bitshift operations
+// as of right now, only the 4 lowest bits are used
+// speed : time in frames to get from a tile to another. 0 will make them snap
+// to their next tile instantly and use mercy_frame as a timer
+typedef struct s_enemy
+{
+	int				dir;
+	t_vector2i		pos;
+	unsigned int	speed;
+	unsigned int	mercy_frame;
+}	t_enemy;
+
+typedef struct s_game_data
+{
+	void		*mlx;
+	void		*mlx_win;
+	char		**map_data;
+	t_vector2i	map_size;
+	t_vector2i	player_pos;
+	t_textures	textures;
+	int			collectible_count;
+	char		*exit;
+	int			game_flags;
+	int			can_step;
+	t_enemy		*enemies;
+	int			enemy_count;
+}				t_game_data;
+# endif
 #endif

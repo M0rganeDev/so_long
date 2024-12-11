@@ -6,14 +6,13 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:02:12 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/03 14:02:14 by morgane         ###   ########.fr       */
+/*   Updated: 2024/12/11 08:31:21 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "map_parser.h"
 #include <unistd.h>
-#include "../renderer.h"
+#include "renderer.h"
 
 static void	reset_map(t_game_data *data)
 {

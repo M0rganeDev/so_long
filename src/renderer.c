@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:00:04 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/03 14:00:08 by morgane         ###   ########.fr       */
+/*   Updated: 2024/12/11 08:56:24 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,7 @@ void	*texture_from_id(t_textures textures, char id, t_game_data *data,
 		return (textures.collectible);
 	if (id == 'E')
 		return (textures.exit);
+	if (IS_BONUS && id == 'F')
+		return (textures.enemy);
 	return (textures.debug);
 }

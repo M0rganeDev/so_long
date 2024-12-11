@@ -2,7 +2,7 @@ CFLAGS = -Wextra -Wall -Werror -ggdb
 
 LIBS = ./libs/
 
-INCLUDES += -I$(LIBS)libft -I$(LIBS)minilibx-linux -I./include
+INCLUDES += -I$(LIBS)libft -I$(LIBS)minilibx-linux -I./includes
 LDFLAGS = $(INCLUDES) -lXext -lX11 -lm -lz -L$(LIBS)minilibx-linux -lmlx -L$(LIBS)libft -lft
 
 SOURCES = src/main.c \
@@ -15,15 +15,20 @@ SOURCES = src/main.c \
 		  src/renderer_util.c \
 		  src/utils.c \
 		  src/parser/floodfill.c \
-		  src/parser/map_leak.c
+		  src/parser/map_leak.c \
+		  src/texture_loader.c \
+
+SBONUS = bonus/enemy.c \
+		 bonus/enemy_utils.c
 
 ifeq ($(BONUS),1)
-	INCLUDES += -I$(LIBS)raylib/include
-	LDFLAGS += -L$(LIBS)raylib/lib -lray
-	CFLAGS += -DRAYLIB=1
+	CFLAGS += -DIS_BONUS=1
+	SOURCES += $(SBONUS)
+else
+	# stupid norm saying my file is 7 functions long when one
+	# there's clearly 3 or 4 depending on if IS_BONUS is set
+	SOURCES += src/mock_enemy_utils.c
 endif
-
-RAYLIB = ./libs/raylib/
 
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -62,13 +67,7 @@ gpull: prepare
 	make libs
 	make all
 
-$(RAYLIB):
-	wget https://github.com/raysan5/raylib/releases/download/5.5/raylib-5.5_linux_amd64.tar.gz
-	tar xf raylib-5.5_linux_amd64.tar.gz
-	rm raylib-5.5_linux_amd64.tar.gz
-	mv raylib-5.5_linux_amd64 libs/raylib
-
-bonus: | $(RAYLIB)
+bonus:
 	make all BONUS=1
 
 libs:

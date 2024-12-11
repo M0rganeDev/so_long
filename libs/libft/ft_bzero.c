@@ -6,13 +6,12 @@
 /*   By: morgane <git@morgane.dev>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:43:38 by morgane          #+#    #+#             */
-/*   Updated: 2024/10/30 08:37:48 by morgane         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:49:00 by Morgane          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t size)
-{
+void	ft_bzero(void *s, size_t size) {
 	ft_memset(s, '\0', size);
 }

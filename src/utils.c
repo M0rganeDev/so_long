@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:01:00 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/03 14:01:04 by morgane         ###   ########.fr       */
+/*   Updated: 2024/12/11 09:51:44 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 int	is_valid_id(char id)
 {
+	if (IS_BONUS && id == 'F')
+		return (1);
 	return (id == '1' || id == '0' || id == 'P' || id == 'C' || id == 'E'
 		|| id == '\n');
 }
@@ -51,6 +53,7 @@ int	clean_up(t_game_data *data)
 	mlx_destroy_image(data->mlx, data->textures.collectible);
 	mlx_destroy_image(data->mlx, data->textures.exit);
 	mlx_destroy_image(data->mlx, data->textures.debug);
+	mlx_destroy_image(data->mlx, data->textures.enemy);
 	delete_walls(data);
 	while (++index < (int)data->map_size.y)
 		free(data->map_data[index]);
@@ -59,6 +62,7 @@ int	clean_up(t_game_data *data)
 	data->mlx_win = NULL;
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
+	free_space(data);
 	exit(0);
 	return (0);
 }

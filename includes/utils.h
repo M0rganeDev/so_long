@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:01:13 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/03 14:01:16 by morgane         ###   ########.fr       */
+/*   Updated: 2024/12/11 09:54:19 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,30 @@
 # define UP_D_A 65363
 
 // check if the tile is one the player can walk on
-int	is_valid_target_tile(t_vector2i pos, t_game_data *data);
+int		is_valid_target_tile(t_vector2i pos, t_game_data *data);
 
 // there is a few reasons why the map could be invalid
-int	process_map_error_code(int code, t_game_data *data);
+int		process_map_error_code(int code, t_game_data *data);
 
 // small method to clean 
-int	clean_up(t_game_data *data);
+int		clean_up(t_game_data *data);
 
 // flip a bit to a specific value
-int	set_bit(int *base, int mask, int new_value);
+int		set_bit(int *base, int mask, int new_value);
 
 // define which chars are considered valid tiles
-int	is_valid_id(char id);
+int		is_valid_id(char id);
+
+// collection of mock methods that are needed for the bonus
+// but implementing properly would require too much code rewrite.
+// so instead, src/mock_enemy_utils.c implement those fakes
+// while bonus/enemy_utils.c implement the real methods.
+void	tick_enemies(t_game_data *data);
+
+void	spawn_enemies(t_game_data *data, t_vector2i pos);
+
+void	make_space_for_enemies(t_game_data *data);
+
+void	free_space(t_game_data *data);
 
 #endif

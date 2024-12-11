@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:59:28 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/03 13:59:31 by morgane         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:27:08 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@
 /**
  *	Util function that do stuff based on player inputs.
 
-	@param tile_after_player_move : the tile the player moved to if
+	tile_after_player_move : the tile the player moved to if
 		it's a valid tile to stand on
+
+	note : GF_GAME_OBJECTIVE_WON being used for player loss
+	is intentional, as both close the game in the same way.
  */
-static void	action(t_game_data *data, char tile_after_player_move)
+void	action(t_game_data *data, char tile_after_player_move)
 {
 	if (tile_after_player_move == 'C')
 	{
@@ -36,6 +39,11 @@ static void	action(t_game_data *data, char tile_after_player_move)
 	{
 		set_bit(&data->game_flags, GF_GAME_OBJECTIVE_WON, 1);
 		ft_printf("player, your winner !\n");
+	}
+	if (tile_after_player_move == 'F')
+	{
+		ft_printf("player lost !\n");
+		set_bit(&data->game_flags, GF_GAME_OBJECTIVE_WON, 1);
 	}
 }
 

@@ -6,14 +6,14 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:02:45 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/05 08:16:11 by morgane          ###   ########.fr       */
+/*   Updated: 2024/12/10 09:48:42 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_PARSER_H
 # define MAP_PARSER_H
 
-# include "../so_long.h"
+# include "so_long.h"
 
 typedef struct s_infos
 {
