@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:01:00 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/11 09:51:44 by morgane          ###   ########.fr       */
+/*   Updated: 2024/12/12 08:50:30 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@
 
 int	is_valid_id(char id)
 {
-	if (IS_BONUS && id == 'F')
-		return (1);
+	if (IS_BONUS)
+	{
+		if (id == 'F')
+			return (1);
+	}
 	return (id == '1' || id == '0' || id == 'P' || id == 'C' || id == 'E'
 		|| id == '\n');
 }

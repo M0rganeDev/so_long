@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:58:59 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/11 16:43:13 by morgane          ###   ########.fr       */
+/*   Updated: 2024/12/12 09:00:06 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,19 @@ int	manage_inputs(int keycode, t_game_data *data)
 
 void	setup_textures(t_game_data *data);
 
+static t_vector2i	map_size(char **map)
+{
+	t_vector2i	_map;
+
+	_map.x = ft_strlen(map[0]) * 32;
+	_map.y = -1;
+	while (map[++_map.y] != NULL)
+	{
+	}
+	_map.y *= 32;
+	return (_map);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game_data	g_data;
@@ -67,11 +80,12 @@ int	main(int argc, char **argv)
 		return (0);
 	g_data.game_flags = 0;
 	g_data.mlx = mlx_init();
-	g_data.mlx_win = mlx_new_window(g_data.mlx, 1280, 720, "Hello world!");
 	setup_textures(&g_data);
 	g_data.map_data = read_map(argv[1]);
 	if (g_data.map_data == NULL)
 		return (ft_printf("Error\n") - ft_strlen("Error\n"));
+	g_data.mlx_win = mlx_new_window(g_data.mlx, map_size(g_data.map_data).x,
+			map_size(g_data.map_data).y, "Hello world!");
 	is_valid = validate_map(&g_data);
 	figure_out_player_pos(&g_data);
 	if (!is_valid)

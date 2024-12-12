@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:00:47 by morgane          #+#    #+#              */
-/*   Updated: 2024/12/11 14:05:46 by morgane          ###   ########.fr       */
+/*   Updated: 2024/12/12 08:51:04 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ typedef struct s_textures
 // game_flags is interacted with through bit manipulation 
 // (see GF flags at the beggining of the file.)
 
-# ifndef IS_BONUS
+# if !IS_BONUS
 
 typedef struct s_game_data
 {
