@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: morgane <git@morgane.dev>                    +#+  +:+       +#+        */
+/*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 16:01:33 by morgane          #+#    #+#             */
-/*   Updated: 2024/11/08 13:51:18 by morgane         ###   ########.fr       */
+/*   Created: 2024/12/12 09:16:42 by morgane           #+#    #+#             */
+/*   Updated: 2024/12/12 09:16:46 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static int	ft_isspace(const char chr)
 {

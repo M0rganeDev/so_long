@@ -40,29 +40,13 @@ SOURCES = ft_strlen.c \
 		  ft_uitoa.c \
 		  ft_ultoa.c
 
-
-BONUS_SOURCES = ft_lstnew_bonus.c \
-				ft_lstadd_front_bonus.c \
-				ft_lstsize_bonus.c \
-				ft_lstlast_bonus.c \
-				ft_lstadd_back_bonus.c \
-				ft_lstdelone_bonus.c \
-				ft_lstclear_bonus.c \
-				ft_lstiter_bonus.c \
-				ft_lstmap_bonus.c
-
 NAME = libft.a
 
 OBJECTS = $(SOURCES:.c=.o)
 
-OBJECT_BONUS = $(BONUS_SOURCES:.c=.o)
-
 CC = gcc
 
 all: $(NAME)
-
-bonus: $(OBJECTS) $(OBJECT_BONUS)
-	ar -rcs libft.a $(OBJECTS) $(OBJECT_BONUS)
 
 $(NAME): $(OBJECTS)
 	ar -rcs libft.a $(OBJECTS)
@@ -71,11 +55,11 @@ $(NAME): $(OBJECTS)
 	$(CC) $(CFLAGS) $?
 
 clean:
-	rm -f $(OBJECTS) $(OBJECT_BONUS)
+	rm -f $(OBJECTS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re

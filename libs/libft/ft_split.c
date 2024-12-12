@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: morgane <git@morgane.dev>                    +#+  +:+       +#+        */
+/*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 12:11:25 by morgane          #+#    #+#             */
-/*   Updated: 2024/11/08 09:52:15 by morgane         ###   ########.fr       */
+/*   Created: 2024/12/12 09:29:06 by morgane           #+#    #+#             */
+/*   Updated: 2024/12/12 09:29:15 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 static char	*populate(const char *str, int start, int end)

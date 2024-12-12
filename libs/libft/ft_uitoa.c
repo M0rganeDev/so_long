@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_uitoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: morgane <git@morgane.dev>                    +#+  +:+       +#+        */
+/*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 15:15:23 by morgane          #+#    #+#             */
-/*   Updated: 2024/11/12 15:22:07 by morgane         ###   ########.fr       */
+/*   Created: 2024/12/12 09:32:55 by morgane           #+#    #+#             */
+/*   Updated: 2024/12/12 09:32:56 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 static int	nb_size(unsigned long n)
