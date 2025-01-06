@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:59:03 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/06 14:09:03 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 16:54:18 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,40 @@ static void	setup_wall_textures(t_game_data *data, t_textures *tiles)
 	tiles->wall_empty_top = load_texture(data->mlx, WALL_EMPTY_TOP);
 }
 
-void	setup_textures(t_game_data *data)
+static void	load_game_textures(t_game_data *data, t_textures *tiles)
 {
-	t_textures	tile;
 	static int	scale = 32;
 
-	ft_printf("Loading main textures\n");
-	tile.player = load_texture(data->mlx, PLAYER_TEXTURE);
-	tile.player_left = load_texture(data->mlx, PLAYER_TEXTURE_FACING_LEFT);
-	tile.ground = load_texture(data->mlx, GROUND_TEXTURE);
-	tile.wall_empty_right = load_texture(data->mlx, WALL_EMPTY_RIGHT);
-	tile.collectible = load_texture(data->mlx, COLLECTIBLE_TEXTURE);
-	tile.exit = load_texture(data->mlx, EXIT_TEXTURE);
-	tile.debug = load_texture(data->mlx, DEBUG_TEXTURE);
-	tile.enemy = load_texture(data->mlx, ENEMY_TEXTURE);
+	tiles->player = load_texture(data->mlx, PLAYER_TEXTURE);
+	tiles->player_left = load_texture(data->mlx, PLAYER_TEXTURE_FACING_LEFT);
+	tiles->ground = load_texture(data->mlx, GROUND_TEXTURE);
+	tiles->wall_empty_right = load_texture(data->mlx, WALL_EMPTY_RIGHT);
+	tiles->collectible = load_texture(data->mlx, COLLECTIBLE_TEXTURE);
+	tiles->exit = load_texture(data->mlx, EXIT_TEXTURE);
+	tiles->enemy = load_texture(data->mlx, ENEMY_TEXTURE);
 	ft_printf("Loading loading UI\n");
-	tile.slash = load_texture(data->mlx, SLASH_TEXTURE);
-	tile.step_label = mlx_xpm_file_to_image(data->mlx, STEP_LABEL_TEXTURE,
+	tiles->slash = load_texture(data->mlx, SLASH_TEXTURE);
+	tiles->step_label = mlx_xpm_file_to_image(data->mlx, STEP_LABEL_TEXTURE,
 			&scale, &scale);
-	tile.collected = mlx_xpm_file_to_image(data->mlx, COLLECTED_TEXTURE,
+	tiles->collected = mlx_xpm_file_to_image(data->mlx, COLLECTED_TEXTURE,
 			&scale, &scale);
+}
+
+int	setup_textures(t_game_data *data)
+{
+	t_textures	tile;
+
+	ft_printf("Loading main textures\n");
+	tile.debug = load_texture(data->mlx, DEBUG_TEXTURE);
+	if (tile.debug == NULL)
+	{
+		ft_printf("Error : can't load texture (check PWD ?)\n");
+		return (0);
+	}
 	setup_wall_textures(data, &tile);
-	data->textures = tile;
+	load_game_textures(data, &tile);
 	generate_number_tilemap(data);
+	data->textures = tile;
 	data->game_flags ^= GF_NEED_WORLD_REFRESH;
+	return (1);
 }

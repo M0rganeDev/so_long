@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:32:35 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/06 16:27:44 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 16:45:29 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,22 @@ int	clean_up(t_game_data *data, int before_init)
 
 	ft_printf("Cleaning up my closet\n");
 	index = -1;
-	delete_textures(data);
-	if (!before_init)
+	if (before_init >= 0)
+		delete_textures(data);
+	if (before_init == 0)
 	{
 		mlx_destroy_window(data->mlx, data->mlx_win);
 		data->mlx_win = NULL;
 	}
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
-	free_space(data);
-	while (++index < (int)data->map_size.y)
-		free(data->map_data[index]);
-	free(data->map_data);
+	if (before_init != -1)
+	{
+		free_space(data);
+		while (++index < (int)data->map_size.y)
+			free(data->map_data[index]);
+		free(data->map_data);
+	}
 	exit(0);
 	return (0);
 }

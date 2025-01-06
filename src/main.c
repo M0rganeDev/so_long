@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:58:59 by morgane          #+#    #+#             */
-/*   Updated: 2025/01/06 16:32:54 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 16:43:16 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	manage_inputs(int keycode, t_game_data *data)
 	return (0);
 }
 
-void	setup_textures(t_game_data *data);
+int	setup_textures(t_game_data *data);
 
 static t_vector2i	map_size(char **map)
 {
@@ -101,7 +101,8 @@ int	main(int argc, char **argv)
 	if (argc == 1 || !ft_strend(argv[1], ".ber"))
 		return (0);
 	g_data.mlx = mlx_init();
-	setup_textures(&g_data);
+	if (!setup_textures(&g_data))
+		return (clean_up(&g_data, -1));
 	g_data.map_data = read_map(argv[1]);
 	if (g_data.map_data == NULL)
 		return (clean_up(&g_data, 1),
