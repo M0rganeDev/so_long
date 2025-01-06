@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:00:47 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/06 13:34:12 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 14:07:56 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@
 # define COLLECTED_TEXTURE "./textures/collected.xpm"
 # define NUMBERS_TILEMAP_TEXTURE "./textures/numbers.xpm"
 # define SLASH_TEXTURE "./textures/slash.xpm"
+# define TXT_0 "./textures/0.xpm"
+# define TXT_1 "./textures/1.xpm"
+# define TXT_2 "./textures/2.xpm"
+# define TXT_3 "./textures/3.xpm"
+# define TXT_4 "./textures/4.xpm"
+# define TXT_5 "./textures/5.xpm"
+# define TXT_6 "./textures/6.xpm"
+# define TXT_7 "./textures/7.xpm"
+# define TXT_8 "./textures/8.xpm"
+# define TXT_9 "./textures/9.xpm"
 
 // used to tell if if the is won and we need to clean up
 // and free memory all over the program

@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 09:45:35 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/06 09:18:38 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 13:54:39 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	spawn_enemies(t_game_data *data, t_vector2i pos)
 void	init_data_enemy_space(t_game_data *data)
 {
 	if (data->enemy_count != 0)
-		data->enemies = (t_enemy *)malloc(sizeof(t_enemy) * (data->enemy_count));
+		data->enemies = (t_enemy *)malloc(
+				sizeof(t_enemy) * (data->enemy_count));
 	else
 		data->enemies = NULL;
 }

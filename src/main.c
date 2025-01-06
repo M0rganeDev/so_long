@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:58:59 by morgane          #+#    #+#             */
-/*   Updated: 2025/01/06 08:01:30 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 14:10:59 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,14 @@ static t_vector2i	map_size(char **map)
 	{
 	}
 	_map.y *= 32;
+	_map.y += (32 * (IS_BONUS * 2));
 	if (_map.x <= 400)
 		_map.x = 400;
 	return (_map);
 }
 
 // valgrind is being a cunt over this.
-void reset_all(t_game_data *data)
+void	reset_all(t_game_data *data)
 {
 	data->enemy_count = 0;
 	data->player_step = 0;
@@ -98,7 +99,7 @@ int	main(int argc, char **argv)
 	if (g_data.map_data == NULL)
 		return (ft_printf("Error\n") - ft_strlen("Error\n"));
 	g_data.mlx_win = mlx_new_window(g_data.mlx, map_size(g_data.map_data).x,
-			(map_size(g_data.map_data).y + (32 * (IS_BONUS * 2))), "Hello world!");
+			map_size(g_data.map_data).y, "Hello world!");
 	is_valid = validate_map(&g_data);
 	figure_out_player_pos(&g_data);
 	if (!is_valid)

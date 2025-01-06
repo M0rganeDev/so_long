@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_destroyer.c                                :+:      :+:    :+:   */
+/*   asset_cleaner.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:32:35 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/06 13:42:21 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 14:04:11 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 #include "mlx.h"
 #include "utils.h"
 
-void    unload_font(t_game_data *data)
+void	unload_font(t_game_data *data)
 {
-    mlx_destroy_image(data->mlx, data->textures.nbr_zero);
-    mlx_destroy_image(data->mlx, data->textures.nbr_one);
-    mlx_destroy_image(data->mlx, data->textures.nbr_two);
-    mlx_destroy_image(data->mlx, data->textures.nbr_three);
-    mlx_destroy_image(data->mlx, data->textures.nbr_four);
-    mlx_destroy_image(data->mlx, data->textures.nbr_five);
-    mlx_destroy_image(data->mlx, data->textures.nbr_six);
-    mlx_destroy_image(data->mlx, data->textures.nbr_seven);
-    mlx_destroy_image(data->mlx, data->textures.nbr_eight);
-    mlx_destroy_image(data->mlx, data->textures.nbr_nine);
+	mlx_destroy_image(data->mlx, data->textures.nbr_zero);
+	mlx_destroy_image(data->mlx, data->textures.nbr_one);
+	mlx_destroy_image(data->mlx, data->textures.nbr_two);
+	mlx_destroy_image(data->mlx, data->textures.nbr_three);
+	mlx_destroy_image(data->mlx, data->textures.nbr_four);
+	mlx_destroy_image(data->mlx, data->textures.nbr_five);
+	mlx_destroy_image(data->mlx, data->textures.nbr_six);
+	mlx_destroy_image(data->mlx, data->textures.nbr_seven);
+	mlx_destroy_image(data->mlx, data->textures.nbr_eight);
+	mlx_destroy_image(data->mlx, data->textures.nbr_nine);
 }
 
 static void	delete_walls(t_game_data *data)
@@ -48,11 +48,9 @@ static void	delete_walls(t_game_data *data)
 	mlx_destroy_image(data->mlx, data->textures.wall_empty_right);
 }
 
-#include "ft_printf.h"
-
 int	clean_up(t_game_data *data)
 {
-	int index;
+	int	index;
 
 	index = -1;
 	mlx_destroy_image(data->mlx, data->textures.player);

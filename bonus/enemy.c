@@ -6,12 +6,11 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:44:36 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/06 09:13:51 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 13:55:23 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "enemy.h"
-#include "ft_printf.h"
 #include "player.h"
 #include "so_long.h"
 #include "utils.h"
@@ -63,10 +62,9 @@ static void	internal_move(t_game_data *data, t_enemy *enemy, t_vector2i pos)
 void	process_enemy_move(t_game_data *data, t_enemy *enemy)
 {
 	t_vector2i	pos;
-	
+
 	if (data->enemy_count == 0)
 		return ;
-	//ft_printf("test\n");
 	if (--enemy->mercy_frame > 0)
 		return ;
 	pos = enemy->pos;
@@ -82,7 +80,6 @@ int	spawn_enemy(t_game_data *data, t_vector2i pos)
 
 	if (total >= data->enemy_count)
 		return (1);
-	//ft_printf("spawning enemy at {.x:%d,.y:%d} (%d/%d)\n", pos.x, pos.y, total, data->enemy_count);
 	enemy.pos = pos;
 	enemy.speed = ENEMY_DEFAULT_SPEED;
 	if (data->map_data[pos.y + 1][pos.x] == '1' ||
