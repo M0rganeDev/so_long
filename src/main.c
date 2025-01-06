@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:58:59 by morgane          #+#    #+#             */
-/*   Updated: 2025/01/06 16:30:32 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 16:32:54 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	manage_inputs(int keycode, t_game_data *data)
 			update_player_pos(data);
 			++data->player_step;
 			ft_printf("Player has taken %d steps.\n", data->player_step);
-			ft_printf("data->player_pos : {%d:%d}\n", data->player_pos.x, data->player_pos.y);
 		}
 	}
 	else
