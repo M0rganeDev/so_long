@@ -6,11 +6,11 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:02:31 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/05 08:19:50 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 14:12:05 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../gnl/get_next_line.h"
+#include "get_next_line.h"
 #include "libft.h"
 #include "map_parser.h"
 #include <fcntl.h>

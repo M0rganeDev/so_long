@@ -30,6 +30,7 @@ else
 	# stupid norm saying my file is 7 functions long when one
 	# there's clearly 3 or 4 depending on if IS_BONUS is set
 	SOURCES += src/utils/mock_enemy_utils.c
+	SOURCES += src/utils/mock_bonus_utils.c
 endif
 
 OBJECTS = $(SOURCES:.c=.o)

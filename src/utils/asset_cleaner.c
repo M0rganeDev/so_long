@@ -6,13 +6,14 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:32:35 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/06 14:04:11 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 14:12:35 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "mlx.h"
 #include "utils.h"
+#include <stdlib.h>
 
 void	unload_font(t_game_data *data)
 {

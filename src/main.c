@@ -6,14 +6,14 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:58:59 by morgane          #+#    #+#             */
-/*   Updated: 2025/01/06 14:10:59 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 14:14:28 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 #include "mlx.h"
-#include "parser/map_parser.h"
+#include "map_parser.h"
 #include "player.h"
 #include "renderer.h"
 #include "so_long.h"
