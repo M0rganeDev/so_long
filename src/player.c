@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:59:28 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/11 11:27:08 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 16:21:41 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	update_player_pos(t_game_data *data)
 {
 	t_vector2i	old_pos;
 
+	if (!data->can_step)
+		return ;
 	old_pos = data->player_pos;
 	if (!(data->game_flags & GF_PLAYER_M_DIR))
 	{
@@ -101,12 +103,14 @@ void	figure_out_player_pos(t_game_data *data)
 		{
 			if (data->map_data[y][x] == 'P')
 			{
+				ft_printf("found player at x:%d, y:%d\n", x, y);
 				data->player_pos.x = x;
 				data->player_pos.y = y;
 				return ;
 			}
 		}
 	}
+	ft_printf("WHERE THE FUCK IS THE PLAYER ?!\n");
 }
 
 void	handle_player_inputs(int keycode, t_game_data *data)

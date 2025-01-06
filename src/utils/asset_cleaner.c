@@ -6,10 +6,11 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:32:35 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/06 14:12:35 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 16:27:44 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "so_long.h"
 #include "mlx.h"
 #include "utils.h"
@@ -49,11 +50,8 @@ static void	delete_walls(t_game_data *data)
 	mlx_destroy_image(data->mlx, data->textures.wall_empty_right);
 }
 
-int	clean_up(t_game_data *data)
+static void	delete_textures(t_game_data *data)
 {
-	int	index;
-
-	index = -1;
 	mlx_destroy_image(data->mlx, data->textures.player);
 	mlx_destroy_image(data->mlx, data->textures.player_left);
 	mlx_destroy_image(data->mlx, data->textures.ground);
@@ -66,14 +64,26 @@ int	clean_up(t_game_data *data)
 	mlx_destroy_image(data->mlx, data->textures.slash);
 	unload_font(data);
 	delete_walls(data);
-	while (++index < (int)data->map_size.y)
-		free(data->map_data[index]);
-	free(data->map_data);
-	mlx_destroy_window(data->mlx, data->mlx_win);
-	data->mlx_win = NULL;
+}
+
+int	clean_up(t_game_data *data, int before_init)
+{
+	int	index;
+
+	ft_printf("Cleaning up my closet\n");
+	index = -1;
+	delete_textures(data);
+	if (!before_init)
+	{
+		mlx_destroy_window(data->mlx, data->mlx_win);
+		data->mlx_win = NULL;
+	}
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	free_space(data);
+	while (++index < (int)data->map_size.y)
+		free(data->map_data[index]);
+	free(data->map_data);
 	exit(0);
 	return (0);
 }

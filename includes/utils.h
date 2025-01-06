@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:01:13 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/11 09:54:19 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 16:27:26 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		is_valid_target_tile(t_vector2i pos, t_game_data *data);
 int		process_map_error_code(int code, t_game_data *data);
 
 // small method to clean 
-int		clean_up(t_game_data *data);
+int		clean_up(t_game_data *data, int before_init);
 
 // flip a bit to a specific value
 int		set_bit(int *base, int mask, int new_value);

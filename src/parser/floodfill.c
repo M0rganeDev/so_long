@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:02:12 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/11 08:31:21 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 15:23:46 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	internal_flood_fill(t_game_data *data, t_vector2i origin,
 static int	flood_fill(t_game_data *data, t_vector2i origin, int *found,
 		int fla)
 {
-	if (1)
+	if (0)
 		render_world(data);
 	if (origin.x < 0 || origin.x >= data->map_size.x || origin.y < 0
 		|| origin.y >= data->map_size.y)
