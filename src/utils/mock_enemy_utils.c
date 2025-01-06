@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enemy_utils.c                                      :+:      :+:    :+:   */
+/*   mock_enemy_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 08:58:52 by morgane           #+#    #+#             */
-/*   Updated: 2024/12/11 09:45:10 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 07:50:44 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "utils.h"
 
-#if !IS_BONUS
+// #if !IS_BONUS
 
 // do jack shit as the executable literally dont have access 
 // to enemy code in mandatory mode. I would have done it differently,
@@ -62,4 +62,4 @@ void	free_space(t_game_data *data)
 	(void)data;
 }
 
-#endif
+// #endif

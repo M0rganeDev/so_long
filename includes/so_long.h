@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 14:00:47 by morgane          #+#    #+#              */
-/*   Updated: 2024/12/12 08:51:04 by morgane          ###   ########.fr       */
+/*   Created: 2024/12/03 14:00:47 by morgane           #+#    #+#             */
+/*   Updated: 2025/01/06 13:34:12 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@
 # define EXIT_TEXTURE "./textures/exit.xpm"
 # define DEBUG_TEXTURE "./textures/debug.xpm"
 # define ENEMY_TEXTURE "./textures/enemy.xpm"
+# define STEP_LABEL_TEXTURE "./textures/step_label.xpm"
+# define COLLECTED_TEXTURE "./textures/collected.xpm"
+# define NUMBERS_TILEMAP_TEXTURE "./textures/numbers.xpm"
+# define SLASH_TEXTURE "./textures/slash.xpm"
 
 // used to tell if if the is won and we need to clean up
 // and free memory all over the program
@@ -88,29 +92,42 @@ t_vector2i	vector_add_lit(t_vector2i base, int x, int y);
 // instead of allocating memory for each tile that use the texture
 typedef struct s_textures
 {
-	void	*player;
-	void	*player_left;
-	void	*ground;
-	void	*collectible;
-	void	*exit;
-	void	*enemy;
-	void	*wall_full_all_sides;
-	void	*wall_empty_all_sides;
-	void	*wall_side_left;
-	void	*wall_side_under;
-	void	*wall_side_right;
-	void	*wall_side_over;
-	void	*wall_corner_top_right;
-	void	*wall_corner_top_left;
-	void	*wall_corner_bottom_right;
-	void	*wall_corner_bottom_left;
-	void	*wall_two_sides_left_right;
-	void	*wall_two_side_top_down;
-	void	*wall_empty_bottom;
-	void	*wall_empty_left;
-	void	*wall_empty_top;
-	void	*wall_empty_right;
-	void	*debug;
+	void				*player;
+	void				*player_left;
+	void				*ground;
+	void				*collectible;
+	void				*exit;
+	void				*enemy;
+	void				*wall_full_all_sides;
+	void				*wall_empty_all_sides;
+	void				*wall_side_left;
+	void				*wall_side_under;
+	void				*wall_side_right;
+	void				*wall_side_over;
+	void				*wall_corner_top_right;
+	void				*wall_corner_top_left;
+	void				*wall_corner_bottom_right;
+	void				*wall_corner_bottom_left;
+	void				*wall_two_sides_left_right;
+	void				*wall_two_side_top_down;
+	void				*wall_empty_bottom;
+	void				*wall_empty_left;
+	void				*wall_empty_top;
+	void				*wall_empty_right;
+	void				*debug;
+	void				*step_label;
+	void				*collected;
+	void				*slash;
+	void				*nbr_zero;
+	void				*nbr_one;
+	void				*nbr_two;
+	void				*nbr_three;
+	void				*nbr_four;
+	void				*nbr_five;
+	void				*nbr_six;
+	void				*nbr_seven;
+	void				*nbr_eight;
+	void				*nbr_nine;
 }				t_textures;
 
 // main struct, contains windows data, map properties,
@@ -129,9 +146,11 @@ typedef struct s_game_data
 	t_vector2i	player_pos;
 	t_textures	textures;
 	int			collectible_count;
+	int			base_collectible;
 	char		*exit;
 	int			game_flags;
 	int			can_step;
+	int			player_step;
 	int			enemy_count;
 }				t_game_data;
 # else
@@ -171,8 +190,10 @@ typedef struct s_game_data
 	t_vector2i	player_pos;
 	t_textures	textures;
 	int			collectible_count;
+	int			base_collectible;
 	char		*exit;
 	int			game_flags;
+	int			player_step;
 	int			can_step;
 	t_enemy		*enemies;
 	int			enemy_count;

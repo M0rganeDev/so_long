@@ -102,5 +102,6 @@ int	validate_map(t_game_data *d)
 		return (0);
 	if ((i.tmask & 1) == 0 || (i.tmask & 2) == 0 || !is_exit_available(d, &i))
 		return (0);
+	d->base_collectible = d->collectible_count;
 	return (*d->exit = '0', render_world(d), 1);
 }

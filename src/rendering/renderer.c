@@ -6,16 +6,14 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:00:04 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/11 08:56:24 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 07:58:14 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "mlx.h"
 #include "renderer.h"
 #include "so_long.h"
 #include "utils.h"
-#include <stdlib.h>
 
 void	render_world(t_game_data *data)
 {
@@ -30,7 +28,7 @@ void	render_world(t_game_data *data)
 				render_tile(data, texture_from_id(data->textures,
 						data->map_data[pos.y][pos.x], data, pos),
 					pos.x * TILE_SCALE,
-					pos.y * TILE_SCALE);
+					(pos.y + (IS_BONUS * 2)) * TILE_SCALE);
 	}
 	set_bit(&data->game_flags, GF_NEED_WORLD_REFRESH, 0);
 }

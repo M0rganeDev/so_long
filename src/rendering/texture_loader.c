@@ -6,15 +6,34 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:59:03 by morgane           #+#    #+#             */
-/*   Updated: 2024/12/10 14:56:23 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 13:34:01 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "renderer.h"
+#include "mlx.h"
+#include "ft_printf.h"
+
+static void generate_number_tilemap(t_game_data *data)
+{
+	static int scale = 32;
+	ft_printf("Loading fonts\n");
+	data->textures.nbr_zero    = mlx_xpm_file_to_image(data->mlx, "./textures/0.xpm", &scale, &scale);
+	data->textures.nbr_one     = mlx_xpm_file_to_image(data->mlx, "./textures/1.xpm", &scale, &scale);
+	data->textures.nbr_two     = mlx_xpm_file_to_image(data->mlx, "./textures/2.xpm", &scale, &scale);
+	data->textures.nbr_three   = mlx_xpm_file_to_image(data->mlx, "./textures/3.xpm", &scale, &scale);
+	data->textures.nbr_four    = mlx_xpm_file_to_image(data->mlx, "./textures/4.xpm", &scale, &scale);
+	data->textures.nbr_five    = mlx_xpm_file_to_image(data->mlx, "./textures/5.xpm", &scale, &scale);
+	data->textures.nbr_six     = mlx_xpm_file_to_image(data->mlx, "./textures/6.xpm", &scale, &scale);
+	data->textures.nbr_seven   = mlx_xpm_file_to_image(data->mlx, "./textures/7.xpm", &scale, &scale);
+	data->textures.nbr_eight   = mlx_xpm_file_to_image(data->mlx, "./textures/8.xpm", &scale, &scale);
+	data->textures.nbr_nine    = mlx_xpm_file_to_image(data->mlx, "./textures/9.xpm", &scale, &scale);
+}
 
 static void	setup_wall_textures(t_game_data *data, t_textures *tiles)
 {
+	ft_printf("Loading wall textures\n");
 	tiles->wall_full_all_sides = load_texture(data->mlx, WALL_FULL_ALL_SIDES);
 	tiles->wall_empty_all_sides = load_texture(data->mlx, WALL_EMPTY_ALL_SIDES);
 	tiles->wall_side_left = load_texture(data->mlx, WALL_SIDE_LEFT);
@@ -40,7 +59,8 @@ static void	setup_wall_textures(t_game_data *data, t_textures *tiles)
 void	setup_textures(t_game_data *data)
 {
 	t_textures	tile;
-
+	static int			scale = 32;
+	ft_printf("Loading main textures\n");
 	tile.player = load_texture(data->mlx, PLAYER_TEXTURE);
 	tile.player_left = load_texture(data->mlx, PLAYER_TEXTURE_FACING_LEFT);
 	tile.ground = load_texture(data->mlx, GROUND_TEXTURE);
@@ -49,7 +69,14 @@ void	setup_textures(t_game_data *data)
 	tile.exit = load_texture(data->mlx, EXIT_TEXTURE);
 	tile.debug = load_texture(data->mlx, DEBUG_TEXTURE);
 	tile.enemy = load_texture(data->mlx, ENEMY_TEXTURE);
+	ft_printf("Loading loading UI\n");
+	tile.slash = load_texture(data->mlx, SLASH_TEXTURE);
+	tile.step_label = mlx_xpm_file_to_image(data->mlx, STEP_LABEL_TEXTURE,
+			&scale, &scale);
+	tile.collected = mlx_xpm_file_to_image(data->mlx, COLLECTED_TEXTURE,
+			&scale, &scale);
 	setup_wall_textures(data, &tile);
 	data->textures = tile;
+	generate_number_tilemap(data);
 	data->game_flags ^= GF_NEED_WORLD_REFRESH;
 }

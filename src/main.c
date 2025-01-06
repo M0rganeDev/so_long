@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:58:59 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/12 09:00:06 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 08:01:30 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <strings.h>
 #include <X11/X.h>
+#include "score.h"
 
 int	loop(t_game_data *data)
 {
@@ -30,13 +31,12 @@ int	loop(t_game_data *data)
 	if ((data->game_flags & GF_GAME_OBJECTIVE_WON) != 0)
 		clean_up(data);
 	tick_enemies(data);
+	draw_score(data);
 	return (0);
 }
 
 int	manage_inputs(int keycode, t_game_data *data)
 {
-	static int	player_step = 0;
-
 	if (keycode == ESC)
 		clean_up(data);
 	data->can_step = 1;
@@ -48,7 +48,8 @@ int	manage_inputs(int keycode, t_game_data *data)
 		if (data->game_flags & GF_PLAYER_IS_MOVING)
 		{
 			update_player_pos(data);
-			ft_printf("Player has taken %d steps.\n", ++player_step);
+			++data->player_step;
+			ft_printf("Player has taken %d steps.\n", data->player_step);
 		}
 	}
 	else
@@ -68,7 +69,18 @@ static t_vector2i	map_size(char **map)
 	{
 	}
 	_map.y *= 32;
+	if (_map.x <= 400)
+		_map.x = 400;
 	return (_map);
+}
+
+// valgrind is being a cunt over this.
+void reset_all(t_game_data *data)
+{
+	data->enemy_count = 0;
+	data->player_step = 0;
+	data->base_collectible = 0;
+	data->collectible_count = 0;
 }
 
 int	main(int argc, char **argv)
@@ -81,16 +93,16 @@ int	main(int argc, char **argv)
 	g_data.game_flags = 0;
 	g_data.mlx = mlx_init();
 	setup_textures(&g_data);
+	reset_all(&g_data);
 	g_data.map_data = read_map(argv[1]);
 	if (g_data.map_data == NULL)
 		return (ft_printf("Error\n") - ft_strlen("Error\n"));
 	g_data.mlx_win = mlx_new_window(g_data.mlx, map_size(g_data.map_data).x,
-			map_size(g_data.map_data).y, "Hello world!");
+			(map_size(g_data.map_data).y + (32 * (IS_BONUS * 2))), "Hello world!");
 	is_valid = validate_map(&g_data);
 	figure_out_player_pos(&g_data);
 	if (!is_valid)
 		return (ft_printf("Error\n") - ft_strlen("Error\n"));
-	*g_data.exit = '0';
 	mlx_key_hook(g_data.mlx_win, manage_inputs, &g_data);
 	mlx_hook(g_data.mlx_win, DestroyNotify, ButtonPressMask, clean_up, &g_data);
 	mlx_loop_hook(g_data.mlx, loop, &g_data);

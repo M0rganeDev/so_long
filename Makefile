@@ -6,20 +6,22 @@ INCLUDES += -I$(LIBS)libft -I$(LIBS)minilibx-linux -I./includes
 LDFLAGS = $(INCLUDES) -lXext -lX11 -lm -lz -L$(LIBS)minilibx-linux -lmlx -L$(LIBS)libft -lft
 
 SOURCES = src/main.c \
-		  src/renderer.c \
-		  src/gnl/get_next_line.c \
+		  src/player.c \
+		  src/rendering/renderer.c \
+		  src/rendering/renderer_util.c \
+		  src/rendering/texture_loader.c \
+		  src/parser/get_next_line.c \
 		  src/parser/map_parser.c \
 		  src/parser/validator.c \
-		  src/vector.c \
-		  src/player.c \
-		  src/renderer_util.c \
-		  src/utils.c \
 		  src/parser/floodfill.c \
 		  src/parser/map_leak.c \
-		  src/texture_loader.c \
+		  src/utils/vector.c \
+		  src/utils/utils.c \
+		  src/utils/asset_cleaner.c \
 
 SBONUS = bonus/enemy.c \
-		 bonus/enemy_utils.c
+		 bonus/enemy_utils.c \
+		 bonus/score.c
 
 ifeq ($(BONUS),1)
 	CFLAGS += -DIS_BONUS=1
@@ -27,7 +29,7 @@ ifeq ($(BONUS),1)
 else
 	# stupid norm saying my file is 7 functions long when one
 	# there's clearly 3 or 4 depending on if IS_BONUS is set
-	SOURCES += src/mock_enemy_utils.c
+	SOURCES += src/utils/mock_enemy_utils.c
 endif
 
 OBJECTS = $(SOURCES:.c=.o)
@@ -37,18 +39,19 @@ NAME = so_long
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
+	echo $(BONUS)
 	cc $(CFLAGS)  $(OBJECTS) -o $(NAME) $(LDFLAGS)
 
 %.o: %.c
 	cc $(CFLAGS) -c $(INCLUDES) $< -o $@
 
-run: $(NAME)
+run:
 	./so_long.a
 
 clean:
-	rm -f $(OBJECTS)
 	make -C ./libs/libft clean
 	make -C ./libs/minilibx-linux clean
+	find . -name '*.o' -delete
 
 fclean: clean
 	rm -f $(NAME)
@@ -61,7 +64,6 @@ prepare:
 
 gpush: fclean
 	@rm -rf ./libs/minilibx-linux
-	@rm -rf ./libs/raylib
 
 gpull: prepare
 	make libs
@@ -74,4 +76,14 @@ libs:
 	make -C ./libs/libft
 	make -C ./libs/minilibx-linux
 
-.PHONY: all run clean fclean libs bonus
+re:
+	make fclean
+	make libs
+	make
+
+rebonus:
+	make fclean
+	make libs
+	make bonus
+
+.PHONY: all run clean fclean libs bonus re rebonus

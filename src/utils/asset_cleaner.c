@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   texture_destroyer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 14:01:00 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/12 08:50:30 by morgane          ###   ########.fr       */
+/*   Created: 2025/01/06 13:32:35 by morgane           #+#    #+#             */
+/*   Updated: 2025/01/06 13:42:21 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "so_long.h"
+#include "mlx.h"
 #include "utils.h"
-#include <stdlib.h>
 
-int	is_valid_id(char id)
+void    unload_font(t_game_data *data)
 {
-	if (IS_BONUS)
-	{
-		if (id == 'F')
-			return (1);
-	}
-	return (id == '1' || id == '0' || id == 'P' || id == 'C' || id == 'E'
-		|| id == '\n');
+    mlx_destroy_image(data->mlx, data->textures.nbr_zero);
+    mlx_destroy_image(data->mlx, data->textures.nbr_one);
+    mlx_destroy_image(data->mlx, data->textures.nbr_two);
+    mlx_destroy_image(data->mlx, data->textures.nbr_three);
+    mlx_destroy_image(data->mlx, data->textures.nbr_four);
+    mlx_destroy_image(data->mlx, data->textures.nbr_five);
+    mlx_destroy_image(data->mlx, data->textures.nbr_six);
+    mlx_destroy_image(data->mlx, data->textures.nbr_seven);
+    mlx_destroy_image(data->mlx, data->textures.nbr_eight);
+    mlx_destroy_image(data->mlx, data->textures.nbr_nine);
 }
 
 static void	delete_walls(t_game_data *data)
@@ -46,10 +48,13 @@ static void	delete_walls(t_game_data *data)
 	mlx_destroy_image(data->mlx, data->textures.wall_empty_right);
 }
 
+#include "ft_printf.h"
+
 int	clean_up(t_game_data *data)
 {
-	static int	index = -1;
+	int index;
 
+	index = -1;
 	mlx_destroy_image(data->mlx, data->textures.player);
 	mlx_destroy_image(data->mlx, data->textures.player_left);
 	mlx_destroy_image(data->mlx, data->textures.ground);
@@ -57,6 +62,10 @@ int	clean_up(t_game_data *data)
 	mlx_destroy_image(data->mlx, data->textures.exit);
 	mlx_destroy_image(data->mlx, data->textures.debug);
 	mlx_destroy_image(data->mlx, data->textures.enemy);
+	mlx_destroy_image(data->mlx, data->textures.step_label);
+	mlx_destroy_image(data->mlx, data->textures.collected);
+	mlx_destroy_image(data->mlx, data->textures.slash);
+	unload_font(data);
 	delete_walls(data);
 	while (++index < (int)data->map_size.y)
 		free(data->map_data[index]);
@@ -68,19 +77,4 @@ int	clean_up(t_game_data *data)
 	free_space(data);
 	exit(0);
 	return (0);
-}
-
-int	set_bit(int *base, int mask, int new_value)
-{
-	if (new_value)
-		*base |= mask;
-	else
-		*base &= ~mask;
-	return (*base);
-}
-
-int	is_valid_target_tile(t_vector2i pos, t_game_data *data)
-{
-	return (data->map_data[pos.y][pos.x] != '1' && pos.x < data->map_size.x
-		&& pos.y < data->map_size.y);
 }

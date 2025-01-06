@@ -6,20 +6,22 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 09:45:35 by morgane           #+#    #+#             */
-/*   Updated: 2024/12/11 11:39:00 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/06 09:18:38 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../bonus/enemy.h"
-#include "ft_printf.h"
+#include "enemy.h"
 #include "so_long.h"
 #include "utils.h"
 #include <stdlib.h>
+#include "ft_printf.h"
 
 void	tick_enemies(t_game_data *data)
 {
 	int	i;
 
+	if (data->enemy_count == 0)
+		return ;
 	i = -1;
 	while (++i < data->enemy_count)
 	{
@@ -37,7 +39,10 @@ void	spawn_enemies(t_game_data *data, t_vector2i pos)
 
 void	init_data_enemy_space(t_game_data *data)
 {
-	data->enemies = (t_enemy *)malloc(sizeof(t_enemy) * (data->enemy_count));
+	if (data->enemy_count != 0)
+		data->enemies = (t_enemy *)malloc(sizeof(t_enemy) * (data->enemy_count));
+	else
+		data->enemies = NULL;
 }
 
 void	make_space_for_enemies(t_game_data *data)
@@ -47,5 +52,6 @@ void	make_space_for_enemies(t_game_data *data)
 
 void	free_space(t_game_data *data)
 {
-	free(data->enemies);
+	if (data->enemy_count != 0)
+		free(data->enemies);
 }
