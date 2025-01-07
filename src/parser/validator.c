@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:02:58 by morgane          #+#    #+#             */
-/*   Updated: 2025/01/06 16:23:26 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/07 07:51:43 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "renderer.h"
 #include "so_long.h"
 #include "utils.h"
-#include "ft_printf.h"
 
 static int	is_uniq_tile(unsigned int mask, int *container)
 {
@@ -29,10 +28,7 @@ static int	is_uniq_tile(unsigned int mask, int *container)
 static int	mask_to_id(char id)
 {
 	if (id == 'P')
-	{
-		ft_printf("found the fucking player !\n");
 		return (1 << 0);
-	}
 	if (id == 'E')
 		return (1 << 1);
 	return (0);

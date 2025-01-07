@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:32:35 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/06 16:45:29 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/07 07:55:26 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 void	unload_font(t_game_data *data)
 {
+	ft_printf("Deleting font\n");
 	mlx_destroy_image(data->mlx, data->textures.nbr_zero);
 	mlx_destroy_image(data->mlx, data->textures.nbr_one);
 	mlx_destroy_image(data->mlx, data->textures.nbr_two);
@@ -32,6 +33,7 @@ void	unload_font(t_game_data *data)
 
 static void	delete_walls(t_game_data *data)
 {
+	ft_printf("Deleting ground tiles\n");
 	mlx_destroy_image(data->mlx, data->textures.wall_full_all_sides);
 	mlx_destroy_image(data->mlx, data->textures.wall_empty_all_sides);
 	mlx_destroy_image(data->mlx, data->textures.wall_side_left);
@@ -52,6 +54,7 @@ static void	delete_walls(t_game_data *data)
 
 static void	delete_textures(t_game_data *data)
 {
+	ft_printf("Deleting game textures\n");
 	mlx_destroy_image(data->mlx, data->textures.player);
 	mlx_destroy_image(data->mlx, data->textures.player_left);
 	mlx_destroy_image(data->mlx, data->textures.ground);
@@ -62,32 +65,35 @@ static void	delete_textures(t_game_data *data)
 	mlx_destroy_image(data->mlx, data->textures.step_label);
 	mlx_destroy_image(data->mlx, data->textures.collected);
 	mlx_destroy_image(data->mlx, data->textures.slash);
-	unload_font(data);
 	delete_walls(data);
+	unload_font(data);
 }
 
 int	clean_up(t_game_data *data, int before_init)
 {
-	int	index;
+	static int	index = -1;
 
 	ft_printf("Cleaning up my closet\n");
-	index = -1;
 	if (before_init >= 0)
 		delete_textures(data);
 	if (before_init == 0)
 	{
+		ft_printf("deleting the window\n");
 		mlx_destroy_window(data->mlx, data->mlx_win);
 		data->mlx_win = NULL;
 	}
+	ft_printf("Deleting MLX context\n");
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	if (before_init != -1)
 	{
+		ft_printf("Deleting game data\n");
 		free_space(data);
 		while (++index < (int)data->map_size.y)
 			free(data->map_data[index]);
 		free(data->map_data);
 	}
+	ft_printf("everything was cleared properly, we can exit !\n");
 	exit(0);
 	return (0);
 }

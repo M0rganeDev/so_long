@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 07:58:30 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/06 14:03:26 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/07 07:49:46 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	draw_collectible(t_game_data *data)
 	draw_steps(data, collectible_left, &origin);
 	origin.x += 26;
 	mlx_put_image_to_window(data->mlx, data->mlx_win, slash, origin.x, 32);
-	origin.x += 26 * 2;
+	origin.x += 26;
 	draw_steps(data, data->base_collectible, &origin);
 }
 

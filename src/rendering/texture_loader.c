@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:59:03 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/06 16:54:18 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/07 07:48:43 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,19 @@
 #include "mlx.h"
 #include "ft_printf.h"
 
-static void	generate_number_tilemap(t_game_data *data)
+static void	generate_number_tilemap(t_game_data *data, t_textures *tiles)
 {
-	static int	s = 32;
-
 	ft_printf("Loading fonts\n");
-	data->textures.nbr_zero = mlx_xpm_file_to_image(data->mlx, TXT_0, &s, &s);
-	data->textures.nbr_one = mlx_xpm_file_to_image(data->mlx, TXT_1, &s, &s);
-	data->textures.nbr_two = mlx_xpm_file_to_image(data->mlx, TXT_2, &s, &s);
-	data->textures.nbr_three = mlx_xpm_file_to_image(data->mlx, TXT_3, &s, &s);
-	data->textures.nbr_four = mlx_xpm_file_to_image(data->mlx, TXT_4, &s, &s);
-	data->textures.nbr_five = mlx_xpm_file_to_image(data->mlx, TXT_5, &s, &s);
-	data->textures.nbr_six = mlx_xpm_file_to_image(data->mlx, TXT_6, &s, &s);
-	data->textures.nbr_seven = mlx_xpm_file_to_image(data->mlx, TXT_7, &s, &s);
-	data->textures.nbr_eight = mlx_xpm_file_to_image(data->mlx, TXT_8, &s, &s);
-	data->textures.nbr_nine = mlx_xpm_file_to_image(data->mlx, TXT_9, &s, &s);
+	tiles->nbr_zero = load_texture(data->mlx, TXT_0);
+	tiles->nbr_one = load_texture(data->mlx, TXT_1);
+	tiles->nbr_two = load_texture(data->mlx, TXT_2);
+	tiles->nbr_three = load_texture(data->mlx, TXT_3);
+	tiles->nbr_four = load_texture(data->mlx, TXT_4);
+	tiles->nbr_five = load_texture(data->mlx, TXT_5);
+	tiles->nbr_six = load_texture(data->mlx, TXT_6);
+	tiles->nbr_seven = load_texture(data->mlx, TXT_7);
+	tiles->nbr_eight = load_texture(data->mlx, TXT_8);
+	tiles->nbr_nine = load_texture(data->mlx, TXT_9);
 }
 
 static void	setup_wall_textures(t_game_data *data, t_textures *tiles)
@@ -89,7 +87,7 @@ int	setup_textures(t_game_data *data)
 	}
 	setup_wall_textures(data, &tile);
 	load_game_textures(data, &tile);
-	generate_number_tilemap(data);
+	generate_number_tilemap(data, &tile);
 	data->textures = tile;
 	data->game_flags ^= GF_NEED_WORLD_REFRESH;
 	return (1);
