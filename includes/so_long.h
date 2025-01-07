@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:00:47 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/06 14:07:56 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/07 08:01:28 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ typedef struct s_textures
 // main struct, contains windows data, map properties,
 // player coordinates, and so on.
 // game_flags is interacted with through bit manipulation 
-// (see GF flags at the beggining of the file.)
+// (see GF flags at the beggining of the file.
 
 # if !IS_BONUS
 

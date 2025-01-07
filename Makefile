@@ -18,6 +18,7 @@ SOURCES = src/main.c \
 		  src/utils/vector.c \
 		  src/utils/utils.c \
 		  src/utils/asset_cleaner.c \
+		  src/utils/error.c \
 
 SBONUS = bonus/enemy.c \
 		 bonus/enemy_utils.c \

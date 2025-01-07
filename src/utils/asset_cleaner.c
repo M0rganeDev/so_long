@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:32:35 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/07 07:55:26 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/07 08:14:00 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	delete_textures(t_game_data *data)
 	unload_font(data);
 }
 
-int	clean_up(t_game_data *data, int before_init)
+void	clean_up(t_game_data *data, int before_init)
 {
 	static int	index = -1;
 
@@ -95,5 +95,10 @@ int	clean_up(t_game_data *data, int before_init)
 	}
 	ft_printf("everything was cleared properly, we can exit !\n");
 	exit(0);
+}
+
+int	int_c_up(t_game_data *data)
+{
+	clean_up(data, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:58:59 by morgane          #+#    #+#             */
-/*   Updated: 2025/01/06 16:43:16 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/07 08:17:55 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,28 +93,30 @@ void	reset_all(t_game_data *data)
 	data->mlx_win = NULL;
 }
 
+int	int_c_up(t_game_data *data);
+
 int	main(int argc, char **argv)
 {
 	t_game_data	g_data;
 
 	reset_all(&g_data);
-	if (argc == 1 || !ft_strend(argv[1], ".ber"))
-		return (0);
+	if (argc == 1)
+		return (ft_error("Please input a map file", -2, &g_data));
+	if (!ft_strend(argv[1], ".ber"))
+		return (ft_error("Map file must have .ber extention !", -2, &g_data));
 	g_data.mlx = mlx_init();
 	if (!setup_textures(&g_data))
-		return (clean_up(&g_data, -1));
+		return (ft_error("Textures could not be loaded", -1, &g_data));
 	g_data.map_data = read_map(argv[1]);
 	if (g_data.map_data == NULL)
-		return (clean_up(&g_data, 1),
-			ft_printf("Error\n") - ft_strlen("Error\n"));
+		return (ft_error("Could not load map !", 1, &g_data));
 	g_data.mlx_win = mlx_new_window(g_data.mlx, map_size(g_data.map_data).x,
 			map_size(g_data.map_data).y, "Hello world!");
 	if (!validate_map(&g_data))
-		return (clean_up(&g_data, 0),
-			ft_printf("Error\n") - ft_strlen("Error\n"));
+		return (ft_error("Invalid map data", 0, &g_data));
 	figure_out_player_pos(&g_data);
 	mlx_key_hook(g_data.mlx_win, manage_inputs, &g_data);
-	mlx_hook(g_data.mlx_win, DestroyNotify, ButtonPressMask, clean_up, &g_data);
+	mlx_hook(g_data.mlx_win, DestroyNotify, ButtonPressMask, int_c_up, &g_data);
 	mlx_loop_hook(g_data.mlx, loop, &g_data);
 	mlx_loop(g_data.mlx);
 	return (0);
