@@ -6,31 +6,13 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:02:12 by morgane          #+#    #+#             */
-/*   Updated: 2025/01/06 15:23:46 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/08 16:23:45 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
 #include <unistd.h>
 #include "renderer.h"
-
-static void	reset_map(t_game_data *data)
-{
-	t_vector2i	pos;
-
-	pos.y = -1;
-	while (++pos.y < data->map_size.y)
-	{
-		pos.x = -1;
-		while (++pos.x < data->map_size.x)
-		{
-			if (data->map_data[pos.y][pos.x] == 'V')
-				data->map_data[pos.y][pos.x] = '0';
-			if (data->map_data[pos.y][pos.x] == 'T')
-				data->map_data[pos.y][pos.x] = 'C';
-		}
-	}
-}
 
 static int			flood_fill(t_game_data *data, t_vector2i origin, int *found,
 				int fla);
@@ -58,8 +40,7 @@ static int	internal_flood_fill(t_game_data *data, t_vector2i origin,
 static int	flood_fill(t_game_data *data, t_vector2i origin, int *found,
 		int fla)
 {
-	if (0)
-		render_world(data);
+	tmp_render_world(data, origin);
 	if (origin.x < 0 || origin.x >= data->map_size.x || origin.y < 0
 		|| origin.y >= data->map_size.y)
 		return (0);
@@ -69,7 +50,8 @@ static int	flood_fill(t_game_data *data, t_vector2i origin, int *found,
 		return (1);
 	if (data->map_data[origin.y][origin.x] == '1'
 		|| (data->map_data[origin.y][origin.x] == 'V'
-			|| data->map_data[origin.y][origin.x] == 'T')
+			|| data->map_data[origin.y][origin.x] == 'T'
+				|| data->map_data[origin.y][origin.x] == 'X')
 		|| (*found >= data->collectible_count))
 		return (0);
 	if (data->map_data[origin.y][origin.x] == 'C')
@@ -79,6 +61,8 @@ static int	flood_fill(t_game_data *data, t_vector2i origin, int *found,
 	}
 	else if (data->map_data[origin.y][origin.x] == '0')
 		data->map_data[origin.y][origin.x] = 'V';
+	else if (data->map_data[origin.y][origin.x] == 'F')
+		data->map_data[origin.y][origin.x] = 'X';
 	return (internal_flood_fill(data, origin, found, fla));
 }
 

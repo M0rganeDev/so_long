@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:02:45 by morgane          #+#    #+#             */
-/*   Updated: 2024/12/10 09:48:42 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/08 16:24:06 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,7 @@ int		map_leak_to_void(t_game_data *data, t_infos *infos);
 int		is_exit_available(t_game_data *data, t_infos *infos);
 
 int		ft_strend(const char *target, const char *end);
+
+void	tmp_render_world(t_game_data *data, t_vector2i origin);
+void	reset_map(t_game_data *data);
 #endif

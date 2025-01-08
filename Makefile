@@ -14,6 +14,7 @@ SOURCES = src/main.c \
 		  src/parser/map_parser.c \
 		  src/parser/validator.c \
 		  src/parser/floodfill.c \
+		  src/parser/floodfill_utils.c \
 		  src/parser/map_leak.c \
 		  src/utils/vector.c \
 		  src/utils/utils.c \
