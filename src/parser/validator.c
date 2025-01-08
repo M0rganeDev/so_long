@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:02:58 by morgane          #+#    #+#             */
-/*   Updated: 2025/01/07 07:51:43 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/08 07:58:11 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	validate_map(t_game_data *d)
 
 	line_count(d, &i);
 	make_space_for_enemies(d);
+	d->map_size.y = i.map_y;
 	i.y = -1;
 	i.tmask = 0;
 	if (!scan_map(d, &i))
