@@ -46,6 +46,7 @@ make bonus # build the program and link the libraries
 Note for MacOS users : in theory, you can build minilibx-linux under MacOS, but it is not supported at all.
 
 Note for Windows users : dont bother, it wont work.
+
 Execute :
 
 `./so_long maps/[any map present in this directory]`
