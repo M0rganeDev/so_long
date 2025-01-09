@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:02:12 by morgane          #+#    #+#             */
-/*   Updated: 2025/01/08 16:23:45 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/09 09:03:24 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "renderer.h"
 
 static int			flood_fill(t_game_data *data, t_vector2i origin, int *found,
-				int fla);
+						int fla);
 
 static int	internal_flood_fill(t_game_data *data, t_vector2i origin,
 		int *found, int flag)
