@@ -42,7 +42,6 @@ NAME = so_long
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	echo $(BONUS)
 	cc $(CFLAGS)  $(OBJECTS) -o $(NAME) $(LDFLAGS)
 
 %.o: %.c
@@ -63,19 +62,18 @@ fclean: clean
 	make -C ./libs/minilibx-linux clean
 
 prepare:
-	@git clone https://github.com/42Paris/minilibx-linux.git libs/minilibx-linux
+	-@git clone https://github.com/42Paris/minilibx-linux.git libs/minilibx-linux
 
 gpush: fclean
 	@rm -rf ./libs/minilibx-linux
 
 gpull: prepare
-	make libs
 	make all
 
 bonus:
 	make all BONUS=1
 
-libs:
+libs: prepare
 	make -C ./libs/libft
 	make -C ./libs/minilibx-linux
 
