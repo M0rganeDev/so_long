@@ -6,7 +6,7 @@
 /*   By: morgane <git@morgane.dev>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 07:58:30 by morgane           #+#    #+#             */
-/*   Updated: 2025/01/07 07:49:46 by morgane          ###   ########.fr       */
+/*   Updated: 2025/01/10 16:36:16 by morgane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	draw_steps(t_game_data *data, int value, t_vector2i *coo)
 	while (score_as_text[++index])
 	{
 		tx = get_texture_from_char(data, score_as_text[index]);
-		coo->x += (index * 26);
+		coo->x += (26);
 		mlx_put_image_to_window(data->mlx, data->mlx_win, tx, coo->x, coo->y);
 	}
 	free(score_as_text);
@@ -77,7 +77,6 @@ static void	draw_collectible(t_game_data *data)
 	draw_steps(data, collectible_left, &origin);
 	origin.x += 26;
 	mlx_put_image_to_window(data->mlx, data->mlx_win, slash, origin.x, 32);
-	origin.x += 26;
 	draw_steps(data, data->base_collectible, &origin);
 }
 
