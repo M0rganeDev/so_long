@@ -4,6 +4,8 @@
 
 so_long is a school42 project in which we have to create a small maze in which the player can move and have to collect a set amount of collectibles to win.
 
+You can read up some more informations about the project [on my website](https://morgane.dev/projects/so-long).
+
 ## Fair warnings : 
 
 **THIS BRANCH CONTAINS A FOLLOW UP TO THE PROJECT, PLEASE GO TO THE [RESULT BRANCH](https://github.com/M0rganeDev/so_long/tree/result) FOR THE CODE I WROTE INITIALLY**
